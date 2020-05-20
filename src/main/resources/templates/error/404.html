@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head  th:replace="base/common :: meta_head('top',~{::link},~{::script})">
+      <link rel="stylesheet" th:href="@{/css/top.css}" />
+      <script type="text/javascript" th:src="@{/js/sample.js}"></script>
+  </head>
+  <body>
+    <header th:replace="base/common :: header('404 Error')"></header>
+    <article>
+	    <h2>Not Found Page</h2>
+	    <p>Please back to home.</p>
+    </article>
+    <footer th:replace="base/common :: footer"></footer>
+  </body>
+</html>

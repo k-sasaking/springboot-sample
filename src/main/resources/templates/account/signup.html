@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head  th:replace="base/common :: meta_head('top',~{::link},~{::script})">
+      <link rel="stylesheet" th:href="@{/css/top.css}" />
+      <script type="text/javascript" th:src="@{/js/sample.js}"></script>
+  </head>
+  <body>
+    <header th:replace="base/common :: header('Signup')"></header>
+    <article>
+		<form method="post" class="mx-auto w-50" th:action="@{/signup}" th:object="${signupForm}">
+		  <div class="form-group">
+		    <label for="username" th:classappend="${#fields.hasErrors('username')} ? text-danger : ''">Username</label>
+		    <input type="text" class="form-control" id="username" placeholder="Username" name="username" th:value="*{username}" required
+		     th:classappend="${#fields.hasErrors('username')} ?  is-invalid : ''">
+		    <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="help-block text-danger">Please correct value</span>
+		  </div>
+		  <div class="form-group">
+		    <label for="password" th:classappend="${#fields.hasErrors('password')} ? text-danger : ''">Password</label>
+		    <input type="password" class="form-control" id="password" placeholder="*****" name="password" th:value="*{password}" required
+		     th:classappend="${#fields.hasErrors('password')} ?  is-invalid : ''">
+		    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="help-block text-danger">Please correct value</span>
+		  </div>
+		  <div class="form-group">
+		    <label for="passwordConfirm" th:classappend="${#fields.hasErrors('passwordConfirm')} ? text-danger : ''">Password(Confirm)</label>
+		    <input type="password" class="form-control" id="passwordConfirm" placeholder="*****" name="passwordConfirm" th:value="*{passwordConfirm}" required
+		     th:classappend="${#fields.hasErrors('passwordConfirm')} ?  is-invalid : ''">
+		    <span th:if="${#fields.hasErrors('passwordConfirm')}" th:errors="*{passwordConfirm}" class="help-block text-danger">Please correct value</span>
+		  </div>
+		  <div class="text-center m-5">
+			<button type="submit" class="form-control btn btn-primary">Signup</button>
+			<p class="mt-3">If you already had account, you can <a href="/signin">Signin</a>.</p>
+		  </div>
+		</form>
+    </article>
+    <footer th:replace="base/common :: footer"></footer>
+  </body>
+</html>

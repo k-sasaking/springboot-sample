@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head  th:replace="base/common :: meta_head('top',~{::link},~{::script})">
+      <link rel="stylesheet" th:href="@{/css/top.css}" />
+      <script type="text/javascript" th:src="@{/js/sample.js}"></script>
+  </head>
+  <body>
+    <header th:replace="base/common :: header('Signin')"></header>
+    <article>
+	    <div class="alert alert-danger" th:if="${errorMessage}" th:text="${errorMessage}" role="alert">...</div>
+		<form method="post" class="mx-auto w-50" th:action="@{/signin}">
+		  <div class="form-group">
+		    <label for="username">Username</label>
+		    <input type="text" class="form-control" id="username" placeholder="Username" name="username" th:value="${username}" required>
+		  </div>
+		  <div class="form-group">
+		    <label for="password">Password</label>
+		    <input type="password" class="form-control" id="password" placeholder="*****" name="password" required>
+		  </div>
+  		  <div class="text-center m-5">
+		    <button type="submit" class="form-control btn btn-primary">Signin</button>
+		    <p>If you dont't have account, you can <a href="/signup">Signup</a>.</p>
+		  </div>
+		</form>
+    </article>
+    <footer th:replace="base/common :: footer"></footer>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head  th:replace="base/common :: meta_head('top',~{::link},~{::script})">
+      <link rel="stylesheet" th:href="@{/css/top.css}" />
+      <script type="text/javascript" th:src="@{/js/sample.js}"></script>
+  </head>
+  <body>
+    <header th:replace="base/common :: header('Post Form')"></header>
+    <article>
+		<form method="post" th:action="@{/post/create}" th:object="${postForm}">
+		  <input type="hidden" name="id" th:value="*{id}">
+		  <div class="form-group">
+		    <label for="postName" th:classappend="${#fields.hasErrors('postName')} ? text-danger : ''">投稿者名</label>
+		    <input type="text" class="form-control" id="postName" placeholder="post name" name="postName" th:value="*{postName}" required
+		     th:classappend="${#fields.hasErrors('postName')} ?  is-invalid : ''">
+		    <span th:if="${#fields.hasErrors('postName')}" th:errors="*{postName}" class="help-block text-danger">Please correct value</span>
+		  </div>
+		  <div class="form-group">
+		    <label for="postText" th:classappend="${#fields.hasErrors('postText')} ? text-danger : ''">投稿内容</label>
+		    <textarea class="form-control" id="postText" rows="5" placeholder="Please input text here." name="postText" th:text="*{postText}" required
+		    		  th:classappend="${#fields.hasErrors('postText')} ?  is-invalid : ''"></textarea>
+		    <span th:if="${#fields.hasErrors('postText')}" th:errors="*{postText}" class="help-block text-danger">Please correct value</span>
+		  </div>
+		  <div class="form-group">
+		    <div class="form-check">
+		      <input class="form-check-input" type="checkbox"  name="isPublished" th:checked="*{isPublished}"  id="isPublished" checked>
+		      <label class="form-check-label" for="isPublished">
+		        公開する
+		      </label>
+		    </div>
+		  </div>
+		  <button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+    </article>
+    <footer th:replace="base/common :: footer"></footer>
+  </body>
+</html>

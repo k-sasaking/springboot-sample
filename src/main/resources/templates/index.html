@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head  th:replace="base/common :: meta_head('top',~{::link},~{::script})">
+      <link rel="stylesheet" th:href="@{/css/top.css}" />
+      <script type="text/javascript" th:src="@{/js/sample.js}"></script>
+  </head>
+  <body>
+    <header th:replace="base/common :: header('TOP')"></header>
+    <article>
+		<div th:each="article : ${articles}">
+		    <ul class="list-group" style="border:1px solid;">
+			  <li class="list-group-item">投稿名: <span th:text="${article.getPostName()}"></span></li>
+			  <li class="list-group-item">投稿日: <span th:text="${article.getPostDate()}"></span></li>
+			  <li class="list-group-item">投稿内容: <span th:text="${article.getPostText()}"></span></li>
+			  <li th:if="${isAdmin}" class="list-group-item">
+			      <button th:id="'pubtbn-'+${article.getId()}" type="button" class="btn publish-btn"
+			       th:value="${article.getId()}" th:text="${article.getIsPublished() ? 'Unpublish' : 'Publish'}"
+			       th:classappend="${article.getIsPublished() ? 'btn-info' : 'btn-primary'}">Publish</button>
+			      <a th:href="@{/post/edit/{id}(id=${article.getId()})}">
+			      	<button type="button" class="btn btn-success">Edit</button>
+			      </a>
+			      <a th:href="@{/post/delete/confirm/{id}(id=${article.getId()})}">
+			        <button type="button" class="btn btn-danger">Delete</button>
+			      </a>
+			  </li>
+			</ul>
+	    </div> 
+		<nav aria-label="Page navigation example">
+		  <ul th:unless="${isAdmin}" class="pagination justify-content-center">
+		    <li class="page-item" th:classappend="${articles.hasPrevious() ? '' : 'disabled'}">
+		      <a class="page-link" th:href="@{'/search'(page=0,word=${word})}" tabindex="-1">First</a>
+		    </li>
+		    <li class="page-item" th:classappend="${articles.hasPrevious() ? '' : 'disabled'}">
+		    	<a class="page-link" th:href="@{'/search'(page=(${articles.getNumber()}-1),word=${word})}">Previous</a>
+		    </li>
+		    <li class="page-item disabled">
+		    	<a class="page-link" th:href="@{'/search'(page=${articles.getNumber()},word=${word})}" th:text="${articles.getNumber()+1}"></a>
+		    </li>
+		    <li class="page-item" th:classappend="${articles.hasNext() ? '' : 'disabled'}">
+		    	<a class="page-link" th:href="@{'/search'(page=(${articles.getNumber()}+1),word=${word})}">Next</a>
+		    </li>
+		    <li class="page-item" th:classappend="${articles.hasNext() ? '' : 'disabled'}">
+		      <a class="page-link" th:href="@{'/search'(page=(${articles.totalPages}-1),word=${word})}">Last</a>
+		    </li>
+		  </ul>
+		  <ul th:if="${isAdmin}" class="pagination justify-content-center">
+		    <li class="page-item" th:classappend="${articles.hasPrevious() ? '' : 'disabled'}">
+		      <a class="page-link" th:href="@{'/admin/search'(page=0,word=${word})}" tabindex="-1">First</a>
+		    </li>
+		    <li class="page-item" th:classappend="${articles.hasPrevious() ? '' : 'disabled'}">
+		    	<a class="page-link" th:href="@{'/admin/search'(page=(${articles.getNumber()}-1),word=${word})}">Previous</a>
+		    </li>
+		    <li class="page-item disabled">
+		    	<a class="page-link" th:href="@{'/admin/search'(page=${articles.getNumber()},word=${word})}" th:text="${articles.getNumber()+1}"></a>
+		    </li>
+		    <li class="page-item" th:classappend="${articles.hasNext() ? '' : 'disabled'}">
+		    	<a class="page-link" th:href="@{'/admin/search'(page=(${articles.getNumber()}+1),word=${word})}">Next</a>
+		    </li>
+		    <li class="page-item" th:classappend="${articles.hasNext() ? '' : 'disabled'}">
+		      <a class="page-link" th:href="@{'/admin/search'(page=(${articles.totalPages}-1),word=${word})}">Last</a>
+		    </li>
+		  </ul>
+		  
+		</nav>
+    </article>
+    <footer th:replace="base/common :: footer"></footer>
+  </body>
+</html>

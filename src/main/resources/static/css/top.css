@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+article {
+	background-color: #DEDEDE;
+	padding: 5px;
+	padding-bottom: 50px;
+}
+
+ul {
+	margin: 5px 30px 5px 30px; 
+}
