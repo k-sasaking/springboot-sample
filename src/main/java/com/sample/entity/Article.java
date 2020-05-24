@@ -48,7 +48,7 @@ public class Article {
 		this.postName = form.getPostName();
 		this.postText = form.getPostText();
 		this.isPublished = form.getIsPublished();
-		
+		this.postDate = new Date();
 	}
 	
 	
