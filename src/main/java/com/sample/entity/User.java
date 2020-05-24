@@ -11,7 +11,7 @@ import javax.validation.constraints.Email;
 import com.sample.form.SignupForm;
 
 @Entity
-@Table(name = "User")
+@Table(name = "Users")
 public class User{
 	
     @Id
